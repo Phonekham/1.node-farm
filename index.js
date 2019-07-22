@@ -9,12 +9,20 @@ const url = require("url");
 // fs.writeFileSync("./txt/output.txt", textOut);
 // console.log("File Writen");
 
+// SERVER
+const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, "utf-8");
+const dataObj = JSON.parse(data);
+
 const server = http.createServer((req, res) => {
   const pathName = req.url;
   if (pathName === "/" || pathName === "/overview") {
     res.end("this is overview");
   } else if (pathName === "/product") {
     res.end("this isn product");
+  } else if (pathName === "/api") {
+    const productData = JSON.parse(data);
+    res.writeHead(200, { "Content-type": "application/json" });
+    res.end(data);
   } else {
     res.writeHead(404, "page not found", {
       "Conten-type": "text/html",

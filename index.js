@@ -48,6 +48,7 @@ const server = http.createServer((req, res) => {
     res.end("<h1>Page not found</h1>");
   }
 });
-server.listen(8000, "127.0.0.1", () => {
+const port = process.env.PORT || 8000;
+server.listen(port, "127.0.0.1", () => {
   console.log("server is running");
 });
